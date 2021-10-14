@@ -31,17 +31,17 @@ class Financing implements Runnable{
 	public void run() {
 		while(true) {
 			synchronized(c) {
+				try {
+					Thread.sleep(1500);
+				}catch(InterruptedException ie) {
+					System.out.println(ie.getMessage());
+				}
 				for(int i=0;i<3;i++) {
 					long cash=c.getBalance(i)+fund[i];
 					c.setBalance(i, cash);
 				}
 				System.out.println("--------------------");
 				c.notify();
-				try {
-					Thread.sleep(1500);
-				}catch(InterruptedException ie) {
-					System.out.println(ie.getMessage());
-				}
 			}
 		}
 	}
@@ -75,9 +75,9 @@ class Investment implements Runnable{
 					c.wait();
 					for(int i=0;i<3;i++) {
 						double rate=rate(goods[i]);
-						long cash=(long)(c.getBalance(i)+(c.getBalance(i)/rate));
+						long cash=(long)(c.getBalance(i)+(c.getBalance(i)*(rate/100)));
 						c.setBalance(i, cash);
-						System.out.println(goods[i]+"투자 수익률 : "+rate+", 보유금액 : "+c.getBalance(i));
+						System.out.println(goods[i]+"투자 수익률 : "+rate+", 보유금액 : "+cash);
 					}
 				}catch(InterruptedException ie) {
 					System.out.println(ie.getMessage());
