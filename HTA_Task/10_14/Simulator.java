@@ -88,9 +88,9 @@ class Investment implements Runnable{
 }
 public class Simulator {
 	public static void main(String[] args) {
-		Cash c=new Cash(1000000,12);
-		Thread th1=new Thread(new Financing(c,0,0,0));
-		Thread th2=new Thread(new Investment(c,"은행","주식","코인"));
+		Cash c=new Cash(1000000,12); //시드머니 1,000,000 기간 12개월
+		Thread th1=new Thread(new Financing(c,0,100000,200000)); //달마다 자금조달
+		Thread th2=new Thread(new Investment(c,"은행","주식","코인")); //투자상품
 		th1.start();
 		th2.start();
 	}
