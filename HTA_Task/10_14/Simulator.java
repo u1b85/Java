@@ -1,5 +1,5 @@
 import java.util.Random;
-
+//
 class Cash{
 	private long[] balance=new long[3];
 	private int month;
