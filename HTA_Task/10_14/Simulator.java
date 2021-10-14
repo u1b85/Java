@@ -1,5 +1,5 @@
 import java.util.Random;
-//
+//미완성
 class Cash{
 	private long[] balance=new long[3];
 	private int month;
