@@ -40,7 +40,7 @@ class Task_JDBC {
 				+ "	SNUM NUMBER(3);"
 				+ "BEGIN"
 				+ "	SNUM:=BUY_SEQ.CURRVAL;"
-				+ "	UPDATE PAY SET METHOD=? WHERE PNUM=SNUM;"
+				+ "	UPDATE PAY SET METHOD=? WHERE NUM=SNUM;"
 				+ "END;";
 		try {
 			pstmt1=con.prepareStatement(sql1);
@@ -53,6 +53,7 @@ class Task_JDBC {
 			pstmt1.executeUpdate();
 			int n=pstmt2.executeUpdate();
 			System.out.println(n+"건의 제품구매 완료..!");
+			con.commit();
 		}catch(SQLException se) {
 			System.out.println("insert 오류 발생[rollback 실행]: ");
 			se.printStackTrace();
@@ -99,6 +100,7 @@ class Task_JDBC {
 			pstmt1.executeUpdate();
 			int n=pstmt2.executeUpdate();
 			System.out.println(n+"건의 구매정보 수정 완료..!");
+			con.commit();
 		}catch(SQLException se) {
 			System.out.println("update 오류 발생[rollback 실행]: ");
 			se.printStackTrace();
@@ -162,6 +164,7 @@ class Task_JDBC {
 			pstmt.setInt(1, num);
 			int n=pstmt.executeUpdate();
 			System.out.println(n+"건의 구매취소 완료..!");
+			con.commit();
 		}catch(SQLException se) {
 			System.out.println("delete 오류 발생[rollback 실행]: ");
 			se.printStackTrace();
